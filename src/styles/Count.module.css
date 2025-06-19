@@ -1,0 +1,34 @@
+.countRed {
+    color: red;
+}
+
+.superCount {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.container {
+    max-width: 350px;
+    padding: 4px;
+    border: 3px solid #249aff;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.count {
+    background-color: #249aff;
+    padding: 10px;
+}
+
+.buttons {
+    padding: 8px 3px 3px 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+
+    button{
+        cursor: pointer;
+    }
+}

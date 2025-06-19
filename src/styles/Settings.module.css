@@ -1,0 +1,33 @@
+.settings {
+    max-width: 350px;
+    padding: 4px;
+    border: 3px solid #249aff;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.inputs {
+    border: 3px solid #249aff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.set {
+    border: 3px solid #249aff;
+    border-radius: 5px;
+}
+
+.label {
+    color: #249aff;
+}
+
+.input {
+    background-color: #f9f9f9;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+}
