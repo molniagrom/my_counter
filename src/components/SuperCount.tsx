@@ -30,6 +30,8 @@ export const SuperCount = () => {
     return (
         <div className={s.superCount}>
             <Settings
+                maxValue={max}
+                minValue={min}
                 getAndSetValue={getAndSetValue}
                 getMaxValue={getMaxValue}
                 getStartValue={getStartValue}/>

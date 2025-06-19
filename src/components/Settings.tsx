@@ -6,6 +6,8 @@ type SettingsPropsType = {
     getMaxValue?: (value: string) => void
     getStartValue?: (value: string) => void
     getAndSetValue?: () => void
+    minValue: number,
+    maxValue: number,
 }
 
 export const Settings = (props: SettingsPropsType) => {
@@ -31,6 +33,7 @@ export const Settings = (props: SettingsPropsType) => {
         <div className={s.settings}>
             <div className={s.inputs}>
                 <Input
+                    value={props.maxValue}
                     getMaxValue={getMaxValue}
                     inputType="number"
                     htmlFor="maxValue"
@@ -39,6 +42,7 @@ export const Settings = (props: SettingsPropsType) => {
                 />
                 <br/>
                 <Input
+                    value={props.minValue}
                     inputType="number"
                     htmlFor="startValue"
                     labelValue="start value"
