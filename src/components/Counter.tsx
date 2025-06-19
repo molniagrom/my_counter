@@ -6,16 +6,23 @@ type CounterPropsType = {
     count: number,
     onClickHandlerInc: () => void,
     onClickHandlerRes: () => void,
+    isSet: boolean,
 }
 
-export const Counter = ({minValue, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
+export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
 
     return (
         <div className={s.container}>
             <div className={s.count}>
-                <p className={count >= maxValue ? s.countRed : ""}>
-                    {count}
-                </p>
+                {!isSet ? (
+                    <p className={s.message}>Введите значения и нажмите "set"</p>
+                ) : maxValue <= minValue ? (
+                    <p className={s.countRed}>Стартовое значение не должно быть больше или равно максимальному</p>
+                ) : (
+                    <p className={count >= maxValue && count !== 0 ? s.countRed : ""}>
+                        {count}
+                    </p>
+                )}
             </div>
             <div className={s.buttons}>
                 <button

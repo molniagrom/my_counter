@@ -1,5 +1,7 @@
 import s from "../styles/Settings.module.css";
-import type {ChangeEvent} from "react";
+import st from "../styles/Count.module.css";
+import {type ChangeEvent, useEffect} from "react";
+import {useState} from "react";
 
 type PropsTypeInput = {
     labelValue: string,
@@ -11,23 +13,34 @@ type PropsTypeInput = {
     value?: number
 }
 
-export const Input = ({ inputType, value, getMaxValue, getStartValue, inputId, labelValue, htmlFor}: PropsTypeInput) => {
+export const Input = (
+    {inputType, value, getMaxValue, getStartValue, inputId, labelValue, htmlFor}
+    : PropsTypeInput) => {
 
-   const getValue = (e: ChangeEvent<HTMLInputElement>) => {
-       // console.log(e.currentTarget.value)
-       if (getStartValue) {
-           getStartValue(e.currentTarget.value)
-       }
+    const [isRed, setRed] = useState(false);
 
-       if (getMaxValue) {
-           getMaxValue(e.currentTarget.value)
-       }
-   }
+    useEffect(() => {
+        if (typeof value === "number") {
+            setRed(value < 0);
+        }
+    }, [value]);
+
+    const getValue = (e: ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.currentTarget.value;
+
+        getStartValue?.(newValue);
+        getMaxValue?.(newValue);
+    }
 
     return (
         <div className={s.inputContainer}>
             <label className={s.label} htmlFor={htmlFor}>{labelValue}</label>
-            <input value={value} onChange={getValue} className={s.input} type={inputType} id={inputId}/>
+            <input
+                value={value}
+                onChange={getValue}
+                className={isRed ? `${s.input} ${st.countRed}` : s.input}
+                type={inputType}
+                id={inputId}/>
         </div>
     );
 };

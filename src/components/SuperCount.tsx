@@ -6,13 +6,18 @@ import {useState} from "react";
 export const SuperCount = () => {
     const [max, setMax] = useState(0);
     const [min, setMin] = useState(0);
+    const [isSet, setIsSet] = useState(true);
+
 
     const getMaxValue = (value: string) => {
         setMax(Number(value));
+        setIsSet(false);
 
     }
     const getStartValue = (value: string) => {
         setMin(Number(value));
+        setIsSet(false);
+
     }
 
     // .....................................................................................................
@@ -25,6 +30,7 @@ export const SuperCount = () => {
 
     const getAndSetValue = () => {
         setCount(min)
+        setIsSet(true);
     }
 
     return (
@@ -37,6 +43,7 @@ export const SuperCount = () => {
                 getStartValue={getStartValue}/>
             <Counter
                 maxValue={max}
+                isSet={isSet}
                 minValue={min}
                 count={count}
                 onClickHandlerInc={onClickHandlerInc}

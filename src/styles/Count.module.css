@@ -10,7 +10,7 @@
 }
 
 .container {
-    max-width: 350px;
+    width: 350px;
     padding: 4px;
     border: 3px solid #249aff;
     border-radius: 5px;
@@ -24,9 +24,10 @@
     background-color: #249aff;
     padding: 10px;
     flex-grow: 1;
-    font-size: 40px;
+    font-size: 30px;
     display: flex;
     align-items: center;
+    color: white;
     justify-content: center;
 }
 
