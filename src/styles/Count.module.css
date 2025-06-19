@@ -5,6 +5,7 @@
 .superCount {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 30px;
 }
 
@@ -14,11 +15,19 @@
     border: 3px solid #249aff;
     border-radius: 5px;
     font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .count {
     background-color: #249aff;
     padding: 10px;
+    flex-grow: 1;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttons {

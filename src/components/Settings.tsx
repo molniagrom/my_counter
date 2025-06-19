@@ -7,11 +7,19 @@ export const Settings = () => {
     return (
         <div className={s.settings}>
             <div className={s.inputs}>
-
-                <Input/>
+                <Input
+                    inputType="number"
+                    htmlFor="maxValue"
+                    labelValue="max value"
+                    inputId="maxValue"
+                />
                 <br/>
-                <label className={s.label} htmlFor="startValue">start value</label>
-                <input className={s.input} type="number" id="startValue"/>
+                <Input
+                    inputType="number"
+                    htmlFor="startValue"
+                    labelValue="start value"
+                    inputId="startValue"
+                />
             </div>
             <div className={s.set}>
                 <Button onClick={() => console.log("set")}>set</Button>

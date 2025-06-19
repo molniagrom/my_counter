@@ -4,17 +4,21 @@
     border: 3px solid #249aff;
     border-radius: 5px;
     font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .inputs {
     border: 3px solid #249aff;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .set {
     border: 3px solid #249aff;
     border-radius: 5px;
+    padding: 13px 0;
 }
 
 .label {
@@ -23,6 +27,12 @@
 
 .input {
     background-color: #f9f9f9;
+    outline: 3px solid #49abff;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    text-align: center;
+    font-size: 16px;
 }
 
 .inputContainer {
