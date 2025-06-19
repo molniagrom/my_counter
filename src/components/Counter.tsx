@@ -1,28 +1,29 @@
 import s from "../styles/Count.module.css";
-import {useState} from 'react';
 
-export const Counter = () => {
-    const max = 5
-    const min = 0
-    const [count, setCount] = useState(0)
+type CounterPropsType = {
+    minValue: number,
+    maxValue: number,
+    count: number,
+    onClickHandlerInc: () => void,
+    onClickHandlerRes: () => void,
+}
 
-    const onClickHandlerInc = () => setCount(count + 1)
-    const onClickHandlerRes = () => setCount(min)
+export const Counter = ({minValue, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
 
     return (
         <div className={s.container}>
             <div className={s.count}>
-                <p className={count >= max ? s.countRed : ""}>
+                <p className={count >= maxValue ? s.countRed : ""}>
                     {count}
                 </p>
             </div>
             <div className={s.buttons}>
                 <button
-                    disabled={count >= max}
+                    disabled={count >= maxValue}
                     onClick={onClickHandlerInc}>inc
                 </button>
                 <button
-                    disabled={count === min}
+                    disabled={count === minValue}
                     onClick={onClickHandlerRes}>reset
                 </button>
             </div>
