@@ -20,6 +20,7 @@ export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, 
     //     setError('Введите значения и нажмите "set"')
     // }
 
+    //todo: В зависимости от этих условий мы должны обрабатывать const [error, setError] = useState<string | null>(null);
     return (
         <div className={s.container}>
             <div className={s.count}>

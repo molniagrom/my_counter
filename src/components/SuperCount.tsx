@@ -8,6 +8,7 @@ export const SuperCount = () => {
     const [min, setMin] = useState(0);
     const [isSet, setIsSet] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    //todo: условия с 27 стр. в Counter Написать здесь,
 
     const getMaxValue = (value: string) => {
         setMax(Number(value));
