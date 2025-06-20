@@ -7,7 +7,7 @@ export const SuperCount = () => {
     const [max, setMax] = useState(0);
     const [min, setMin] = useState(0);
     const [isSet, setIsSet] = useState(true);
-
+    const [error, setError] = useState<string | null>(null);
 
     const getMaxValue = (value: string) => {
         setMax(Number(value));
@@ -29,8 +29,12 @@ export const SuperCount = () => {
     // .....................................................................................................
 
     const getAndSetValue = () => {
-        setCount(min)
-        setIsSet(true);
+        if (min < 0) {
+            setIsSet(false);
+        } else {
+            setCount(min)
+            setIsSet(true);
+        }
     }
 
     return (

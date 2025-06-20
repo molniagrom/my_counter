@@ -1,4 +1,5 @@
 import s from "../styles/Count.module.css";
+// import {useState} from "react";
 
 type CounterPropsType = {
     minValue: number,
@@ -10,14 +11,24 @@ type CounterPropsType = {
 }
 
 export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
+    console.log("isSet:", isSet);
+    // const [error, setError] = useState<string | null>(null);
+
+    // if (minValue < 0){
+    //     setError('Введите значения и нажмите "set"')
+    // } else if (!isSet){
+    //     setError('Введите значения и нажмите "set"')
+    // }
 
     return (
         <div className={s.container}>
             <div className={s.count}>
-                {!isSet ? (
-                    <p className={s.message}>Введите значения и нажмите "set"</p>
+                {minValue < 0 ? (
+                    <p className={s.countRed}>Стартовое значение не должно быть меньше 0</p>
                 ) : maxValue <= minValue ? (
                     <p className={s.countRed}>Стартовое значение не должно быть больше или равно максимальному</p>
+                ) : !isSet ? (
+                    <p className={s.message}>Введите значения и нажмите "set"</p>
                 ) : (
                     <p className={count >= maxValue && count !== 0 ? s.countRed : ""}>
                         {count}
@@ -35,6 +46,7 @@ export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, 
                 </button>
             </div>
         </div>
-    );
+    )
+        ;
 };
 
