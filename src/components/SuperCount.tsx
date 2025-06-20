@@ -8,17 +8,37 @@ export const SuperCount = () => {
     const [min, setMin] = useState(0);
     const [isSet, setIsSet] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    //todo: условия с 27 стр. в Counter Написать здесь,
+
+    //todo: Все 3 значения (max, min count) отслеживать и "транслировать" а localStorage
 
     const getMaxValue = (value: string) => {
-        setMax(Number(value));
-        setIsSet(false);
+        setError(null)
+        const numberValue = Number(value)
 
+        if (numberValue <= 0) {
+            setError("Максимальное значение должно быть не меньше 0")
+            setMin(0);
+        } else if (numberValue <= min) {
+            setError("Максимальное значение не должно быть меньше минимального")
+            setMin(max);
+        } else {
+            setMax(numberValue);
+            setIsSet(false);
+        }
     }
     const getStartValue = (value: string) => {
-        setMin(Number(value));
-        setIsSet(false);
-
+        setError(null)
+        const numberValue = Number(value)
+        if (numberValue < 0) {
+            setError("Стартовое значение не должно быть меньше 0")
+            setMin(Number(0));
+        } else if (max <= numberValue) {
+            setError("Стартовое значение не должно быть больше или равно максимальному")
+            setMin(max);
+        } else {
+            setMin(numberValue);
+            setIsSet(false);
+        }
     }
 
     // .....................................................................................................
@@ -41,12 +61,14 @@ export const SuperCount = () => {
     return (
         <div className={s.superCount}>
             <Settings
+                error={error}
                 maxValue={max}
                 minValue={min}
                 getAndSetValue={getAndSetValue}
                 getMaxValue={getMaxValue}
                 getStartValue={getStartValue}/>
             <Counter
+                error={error}
                 maxValue={max}
                 isSet={isSet}
                 minValue={min}

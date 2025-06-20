@@ -8,9 +8,10 @@ type CounterPropsType = {
     onClickHandlerInc: () => void,
     onClickHandlerRes: () => void,
     isSet: boolean,
+    error: string | null,
 }
 
-export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
+export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
     console.log("isSet:", isSet);
     // const [error, setError] = useState<string | null>(null);
 
@@ -24,10 +25,8 @@ export const Counter = ({minValue, isSet, onClickHandlerInc, onClickHandlerRes, 
     return (
         <div className={s.container}>
             <div className={s.count}>
-                {minValue < 0 ? (
-                    <p className={s.countRed}>Стартовое значение не должно быть меньше 0</p>
-                ) : maxValue <= minValue ? (
-                    <p className={s.countRed}>Стартовое значение не должно быть больше или равно максимальному</p>
+                {error ? (
+                    <p className={s.countRed}>{error}</p>
                 ) : !isSet ? (
                     <p className={s.message}>Введите значения и нажмите "set"</p>
                 ) : (

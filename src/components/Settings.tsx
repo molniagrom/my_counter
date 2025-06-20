@@ -8,6 +8,7 @@ type SettingsPropsType = {
     getAndSetValue?: () => void
     minValue: number,
     maxValue: number,
+    error: string | null,
 }
 
 export const Settings = (props: SettingsPropsType) => {
@@ -51,7 +52,7 @@ export const Settings = (props: SettingsPropsType) => {
                 />
             </div>
             <div className={s.set}>
-                <Button onClick={onClick}>set</Button>
+                <Button disabled={!!props.error} onClick={onClick}>set</Button>
             </div>
         </div>
     );
