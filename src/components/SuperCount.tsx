@@ -10,41 +10,11 @@ export const SuperCount = () => {
     const [error, setError] = useState<string | null>(null);
 
     //todo: Все 3 значения (max, min count) отслеживать и "транслировать" а localStorage
-
-    // const getMaxValue = (value: string) => {
-    //     setError(null)
-    //     const numberValue = Number(value)
-    //
-    //     if (numberValue <= 0) {
-    //         setError("The maximum value must be at least 0")
-    //         setMin(0);
-    //     } else if (numberValue <= min) {
-    //         setError("The maximum value must not be less than the minimum value")
-    //         setMin(max);
-    //     } else {
-    //         setMax(numberValue);
-    //         setIsSet(false);
-    //     }
-    // }
-
-    // const getStartValue = (value: string) => {
-    //     setError(null)
-    //     const numberValue = Number(value)
-    //     if (numberValue < 0) {
-    //         setError("The start value must not be less than 0")
-    //         setMin(Number(0));
-    //     } else if (max <= numberValue) {
-    //         setError("The start value must not be greater than or equal to the maximum value")
-    //         setMin(max);
-    //     } else {
-    //         setMin(numberValue);
-    //         setIsSet(false);
-    //         // localStorage.setItem("stsrtValue", JSON.stringify(numberValue));
-    //     }
-    // }
+    //todo: можно посмотреть реализацию с localStorage в записи 2 урока 2 спринта (под конец)
 
     // .....................................................................................................
     // count logic
+    //todo: унести в count
     const [count, setCount] = useState(min)
 
     const onClickHandlerInc = () => setCount(count + 1)
@@ -56,16 +26,17 @@ export const SuperCount = () => {
         setIsSet(false);
         setMax(max)
         setMin(min)
-
     }
 
     return (
         <div className={s.superCount}>
             <Settings
+                isSet={isSet}
                 setError={setError}
                 error={error}
                 maxValue={max}
                 minValue={min}
+                setIsSet={setIsSet}
                 getAndSetValue={getAndSetValue}
                 // getMaxValue={getMaxValue}
                 // getStartValue={getStartValue}

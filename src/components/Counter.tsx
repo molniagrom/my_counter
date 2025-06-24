@@ -13,13 +13,6 @@ type CounterPropsType = {
 
 export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
     console.log("isSet:", isSet);
-    // const [error, setError] = useState<string | null>(null);
-
-    // if (minValue < 0){
-    //     setError('Введите значения и нажмите "set"')
-    // } else if (!isSet){
-    //     setError('Введите значения и нажмите "set"')
-    // }
 
     //todo: В зависимости от этих условий мы должны обрабатывать const [error, setError] = useState<string | null>(null);
     return (
@@ -34,11 +27,11 @@ export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandl
             </div>
             <div className={s.buttons}>
                 <button
-                    disabled={count >= maxValue || !!error}
+                    disabled={count >= maxValue || !!error || isSet}
                     onClick={onClickHandlerInc}>inc
                 </button>
                 <button
-                    disabled={count === minValue || !!error}
+                    disabled={count === minValue || !!error || isSet}
                     onClick={onClickHandlerRes}>reset
                 </button>
             </div>

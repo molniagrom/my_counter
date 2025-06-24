@@ -4,49 +4,63 @@ import s from "../styles/Settings.module.css"
 import {useState} from "react";
 
 type SettingsPropsType = {
-    // getMaxValue: (value: string) => void
-    // getStartValue: (value: string) => void
     getAndSetValue: (min: number, max: number) => void
     minValue: number,
     setError: (error: string | null) => void
     maxValue: number,
     error: string | null,
+    isSet: boolean
+    setIsSet: (isSet: boolean) => void
 }
 
 export const Settings = (props: SettingsPropsType) => {
 
-    const [maxLocal, setMaxLocal] = useState(0);
-    const [minLocal, setMinLocal] = useState(0);
+    const [maxLocal, setMaxLocal] = useState(props.maxValue);
+    const [minLocal, setMinLocal] = useState(props.minValue);
 
     const getMaxValue = (value: number) => {
-        // setMaxLocal(Number(value))
 
-        // props.setError(null)
+        if (!props.isSet) {
+            props.setIsSet(true)
+        }
 
-            if (value <= 0) {
-                props.setError("The maximum value must be at least 0")
-                setMaxLocal(value);
+        if (value <= 0) {
+            props.setError("The maximum value must be at least 0")
+            setMaxLocal(value);
+        } else if (value <= minLocal) {
+            props.setError("The maximum value must not be less than the minimum value")
+            setMaxLocal(value);
 
-                // setMinLocal(0);
-            } else if (value <= minLocal) {
-                props.setError("The maximum value must not be less than the minimum value")
-                // setMinLocal(maxLocal);
-                setMaxLocal(value);
-
-            } else {
-                setMaxLocal(value);
-                props.setError(null)
-            }
+        } else {
+            setMaxLocal(value);
+            props.setError(null)
+        }
 
     }
     const getStartValue = (value: number) => {
-        setMinLocal(Number(value))
+
+        if (!props.isSet) {
+            props.setIsSet(true)
+        }
+
+        if (value < 0) {
+            props.setError("The start value must not be less than 0")
+            setMinLocal(value);
+        } else if (maxLocal <= value) {
+            props.setError("The start value must not be greater than or equal to the maximum value")
+            setMinLocal(value);
+        } else {
+            setMinLocal(value);
+            props.setError(null)
+
+            // localStorage.setItem("stsrtValue", JSON.stringify(numberValue));
+        }
     }
 
     const onClick = () => {
-        if (props.getAndSetValue) {
-            props.getAndSetValue(minLocal, maxLocal);
-        }
+         if (props.error === null) {
+             props.getAndSetValue(minLocal, maxLocal);
+         }
     }
 
     return (
@@ -69,7 +83,7 @@ export const Settings = (props: SettingsPropsType) => {
                 />
             </div>
             <div className={s.set}>
-                <Button disabled={!!props.error} onClick={onClick}>set</Button>
+                <Button disabled={!!props.error || !props.isSet} onClick={onClick}>set</Button>
             </div>
         </div>
     );
