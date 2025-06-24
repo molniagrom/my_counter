@@ -6,13 +6,13 @@ type PropsTypeInput = {
     htmlFor: string,
     // inputId: string,
     inputType: string,
-    getMaxValue?: (value: string) => void
-    getStartValue?: (value: string) => void
+    // getMaxValue?: (value: string) => void
+    getValue: (value: number) => void
     value?: number
 }
 
 export const Input = (
-    {inputType, value, getMaxValue, getStartValue, labelValue, htmlFor}
+    {inputType, value, getValue, labelValue, htmlFor}
     : PropsTypeInput) => {
 
     // const [isRed, setRed] = useState(false);
@@ -23,11 +23,9 @@ export const Input = (
     //     }
     // }, [value]);
 
-    const getValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const getValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = e.currentTarget.value;
-
-        getStartValue?.(newValue);
-        getMaxValue?.(newValue);
+        getValue(Number(newValue));
     }
 
     return (
@@ -35,7 +33,7 @@ export const Input = (
             <label className={s.label} htmlFor={htmlFor}>{labelValue}</label>
             <input
                 value={value}
-                onChange={getValue}
+                onChange={getValueHandler}
                 className={s.input}
                 type={inputType}
                 />

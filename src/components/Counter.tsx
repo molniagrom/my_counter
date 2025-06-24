@@ -25,14 +25,11 @@ export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandl
     return (
         <div className={s.container}>
             <div className={s.count}>
-                {error ? (
-                    <p className={s.countRed}>{error}</p>
-                ) : !isSet ? (
-                    <p className={s.message}>Введите значения и нажмите "set"</p>
-                ) : (
-                    <p className={count >= maxValue && count !== 0 ? s.countRed : ""}>
-                        {count}
-                    </p>
+                {error
+                    ? (<p className={s.countRed}>{error}</p>)
+                    : isSet
+                        ? (<p className={s.message}>Введите значения и нажмите "set"</p>)
+                        : (<p className={count >= maxValue && count !== 0 ? s.countRed : ""}>{count}</p>
                 )}
             </div>
             <div className={s.buttons}>
