@@ -16,28 +16,30 @@ export const SuperCount = () => {
         const numberValue = Number(value)
 
         if (numberValue <= 0) {
-            setError("Максимальное значение должно быть не меньше 0")
+            setError("The maximum value must be at least 0")
             setMin(0);
         } else if (numberValue <= min) {
-            setError("Максимальное значение не должно быть меньше минимального")
+            setError("The maximum value must not be less than the minimum value")
             setMin(max);
         } else {
             setMax(numberValue);
             setIsSet(false);
         }
     }
+
     const getStartValue = (value: string) => {
         setError(null)
         const numberValue = Number(value)
         if (numberValue < 0) {
-            setError("Стартовое значение не должно быть меньше 0")
+            setError("The start value must not be less than 0")
             setMin(Number(0));
         } else if (max <= numberValue) {
-            setError("Стартовое значение не должно быть больше или равно максимальному")
+            setError("The start value must not be greater than or equal to the maximum value")
             setMin(max);
         } else {
             setMin(numberValue);
             setIsSet(false);
+            // localStorage.setItem("stsrtValue", JSON.stringify(numberValue));
         }
     }
 
@@ -49,12 +51,14 @@ export const SuperCount = () => {
     const onClickHandlerRes = () => setCount(min)
     // .....................................................................................................
 
-    const getAndSetValue = () => {
+    const getAndSetValue = (min: number, max: number) => {
         if (min < 0) {
             setIsSet(false);
         } else {
             setCount(min)
             setIsSet(true);
+            setMax(max)
+            setMin(min)
         }
     }
 

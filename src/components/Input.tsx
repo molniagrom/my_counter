@@ -4,7 +4,7 @@ import {type ChangeEvent} from "react";
 type PropsTypeInput = {
     labelValue: string,
     htmlFor: string,
-    inputId: string,
+    // inputId: string,
     inputType: string,
     getMaxValue?: (value: string) => void
     getStartValue?: (value: string) => void
@@ -12,7 +12,7 @@ type PropsTypeInput = {
 }
 
 export const Input = (
-    {inputType, value, getMaxValue, getStartValue, inputId, labelValue, htmlFor}
+    {inputType, value, getMaxValue, getStartValue, labelValue, htmlFor}
     : PropsTypeInput) => {
 
     // const [isRed, setRed] = useState(false);
@@ -38,7 +38,7 @@ export const Input = (
                 onChange={getValue}
                 className={s.input}
                 type={inputType}
-                id={inputId}/>
+                />
         </div>
     );
 };

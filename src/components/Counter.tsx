@@ -37,11 +37,11 @@ export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandl
             </div>
             <div className={s.buttons}>
                 <button
-                    disabled={count >= maxValue}
+                    disabled={count >= maxValue || !!error}
                     onClick={onClickHandlerInc}>inc
                 </button>
                 <button
-                    disabled={count === minValue}
+                    disabled={count === minValue || !!error}
                     onClick={onClickHandlerRes}>reset
                 </button>
             </div>

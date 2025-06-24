@@ -1,11 +1,12 @@
 import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 import s from "../styles/Settings.module.css"
+import {useState} from "react";
 
 type SettingsPropsType = {
-    getMaxValue?: (value: string) => void
-    getStartValue?: (value: string) => void
-    getAndSetValue?: () => void
+    getMaxValue: (value: string) => void
+    getStartValue: (value: string) => void
+    getAndSetValue: (min: number, max: number) => void
     minValue: number,
     maxValue: number,
     error: string | null,
@@ -13,20 +14,19 @@ type SettingsPropsType = {
 
 export const Settings = (props: SettingsPropsType) => {
 
+    const [maxLocal, setMaxLocal] = useState(0);
+    const [minLocal, setMinLocal] = useState(0);
+
     const getMaxValue = (value: string) => {
-        if (props.getMaxValue) {
-            props.getMaxValue(value)
-        }
+        setMaxLocal(Number(value))
     }
     const getStartValue = (value: string) => {
-       if (props.getStartValue) {
-           props.getStartValue(value)
-       }
+        setMinLocal(Number(value))
     }
 
     const onClick = () => {
         if (props.getAndSetValue) {
-            props.getAndSetValue();
+            props.getAndSetValue(minLocal, maxLocal);
         }
     }
 
@@ -34,20 +34,18 @@ export const Settings = (props: SettingsPropsType) => {
         <div className={s.settings}>
             <div className={s.inputs}>
                 <Input
-                    value={props.maxValue}
+                    value={maxLocal}
                     getMaxValue={getMaxValue}
                     inputType="number"
                     htmlFor="maxValue"
                     labelValue="max value"
-                    inputId="maxValue"
                 />
                 <br/>
                 <Input
-                    value={props.minValue}
+                    value={minLocal}
                     inputType="number"
                     htmlFor="startValue"
                     labelValue="start value"
-                    inputId="startValue"
                     getStartValue={getStartValue}
                 />
             </div>
