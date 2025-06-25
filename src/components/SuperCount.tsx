@@ -8,35 +8,23 @@ export const SuperCount = () => {
     const [min, setMin] = useState(0);
     const [isSet, setIsSet] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [count, setCount] = useState(min)
 
     //todo: Все 3 значения (max, min count) отслеживать и "транслировать" а localStorage
     //todo: можно посмотреть реализацию с localStorage в записи 2 урока 2 спринта (под конец)
-
-    // .....................................................................................................
-    // count logic
-    //todo: унести в count
-    const [count, setCount] = useState(min)
-
-
-    // .....................................................................................................
-
-    const getAndSetValue = (min: number, max: number) => {
-        setCount(min)
-        setIsSet(false);
-        setMax(max)
-        setMin(min)
-    }
 
     return (
         <div className={s.superCount}>
             <Settings
                 isSet={isSet}
+                setMin={setMin}
+                setCount={setCount}
+                setMax={setMax}
                 setError={setError}
                 error={error}
                 maxValue={max}
                 minValue={min}
                 setIsSet={setIsSet}
-                getAndSetValue={getAndSetValue}
             />
             <Counter
                 error={error}
