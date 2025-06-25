@@ -1,17 +1,26 @@
 import {Settings} from "./Settings.tsx";
 import {Counter} from "./Counter.tsx";
 import s from "../styles/Count.module.css"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export const SuperCount = () => {
+    useEffect(() => {
+        const counterValueAsStr = localStorage.getItem("counterValue")
+        const counterMaxValueAsStr = localStorage.getItem("counterMaxValue")
+        const counterMinValueAsStr = localStorage.getItem("counterMinValue")
+
+        if (counterValueAsStr && counterMaxValueAsStr && counterMinValueAsStr) {
+            setCount(JSON.parse(counterValueAsStr))
+            setMax(JSON.parse(counterMaxValueAsStr))
+            setMin(JSON.parse(counterMinValueAsStr))
+        }
+    }, [])
+
     const [max, setMax] = useState(0);
     const [min, setMin] = useState(0);
     const [isSet, setIsSet] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [count, setCount] = useState(min)
-
-    //todo: Все 3 значения (max, min count) отслеживать и "транслировать" а localStorage
-    //todo: можно посмотреть реализацию с localStorage в записи 2 урока 2 спринта (под конец)
 
     return (
         <div className={s.superCount}>
@@ -33,7 +42,7 @@ export const SuperCount = () => {
                 isSet={isSet}
                 minValue={min}
                 count={count}
-                />
+            />
         </div>
     );
 };

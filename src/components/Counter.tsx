@@ -15,6 +15,8 @@ export const Counter = ({setCount, minValue, isSet, error, count, maxValue}: Cou
     const onClickHandlerInc = () => setCount(count + 1)
     const onClickHandlerRes = () => setCount(minValue)
 
+
+
     return (
         <div className={s.container}>
             <div className={s.count}>

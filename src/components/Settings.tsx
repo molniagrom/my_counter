@@ -25,9 +25,11 @@ export const Settings = ({setIsSet, setMin, setMax, setCount, isSet, maxValue, m
         setIsSet(false);
         setMax(max)
         setMin(min)
+        localStorage.setItem("counterValue", JSON.stringify(min))
     }
 
     const getMaxValue = (value: number) => {
+        localStorage.setItem("counterMaxValue", JSON.stringify(value))
 
         if (!isSet) {
             setIsSet(true)
@@ -47,6 +49,7 @@ export const Settings = ({setIsSet, setMin, setMax, setCount, isSet, maxValue, m
 
     }
     const getStartValue = (value: number) => {
+        localStorage.setItem("counterMinValue", JSON.stringify(value))
 
         if (!isSet) {
             setIsSet(true)
