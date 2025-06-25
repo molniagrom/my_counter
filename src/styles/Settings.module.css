@@ -35,6 +35,10 @@
     font-size: 16px;
 }
 
+.red {
+    color: red;
+}
+
 .inputContainer {
     display: flex;
     flex-direction: row;
