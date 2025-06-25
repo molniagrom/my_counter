@@ -17,8 +17,7 @@ export const SuperCount = () => {
     //todo: унести в count
     const [count, setCount] = useState(min)
 
-    const onClickHandlerInc = () => setCount(count + 1)
-    const onClickHandlerRes = () => setCount(min)
+
     // .....................................................................................................
 
     const getAndSetValue = (min: number, max: number) => {
@@ -38,17 +37,15 @@ export const SuperCount = () => {
                 minValue={min}
                 setIsSet={setIsSet}
                 getAndSetValue={getAndSetValue}
-                // getMaxValue={getMaxValue}
-                // getStartValue={getStartValue}
             />
             <Counter
                 error={error}
                 maxValue={max}
+                setCount={setCount}
                 isSet={isSet}
                 minValue={min}
                 count={count}
-                onClickHandlerInc={onClickHandlerInc}
-                onClickHandlerRes={onClickHandlerRes}/>
+                />
         </div>
     );
 };

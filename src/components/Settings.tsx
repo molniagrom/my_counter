@@ -53,7 +53,6 @@ export const Settings = (props: SettingsPropsType) => {
             setMinLocal(value);
             props.setError(null)
 
-            // localStorage.setItem("stsrtValue", JSON.stringify(numberValue));
         }
     }
 

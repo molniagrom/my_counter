@@ -1,20 +1,20 @@
 import s from "../styles/Count.module.css";
-// import {useState} from "react";
+import type {Dispatch, SetStateAction} from "react";
 
 type CounterPropsType = {
     minValue: number,
     maxValue: number,
     count: number,
-    onClickHandlerInc: () => void,
-    onClickHandlerRes: () => void,
     isSet: boolean,
+    setCount: Dispatch<SetStateAction<number>>,
     error: string | null,
 }
 
-export const Counter = ({minValue, isSet, error, onClickHandlerInc, onClickHandlerRes, count, maxValue}: CounterPropsType) => {
-    console.log("isSet:", isSet);
+export const Counter = ({setCount, minValue, isSet, error, count, maxValue}: CounterPropsType) => {
 
-    //todo: В зависимости от этих условий мы должны обрабатывать const [error, setError] = useState<string | null>(null);
+    const onClickHandlerInc = () => setCount(count + 1)
+    const onClickHandlerRes = () => setCount(minValue)
+
     return (
         <div className={s.container}>
             <div className={s.count}>
