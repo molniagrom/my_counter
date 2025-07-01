@@ -4,9 +4,7 @@ import {type ChangeEvent, useEffect, useState} from "react";
 type PropsTypeInput = {
     labelValue: string,
     htmlFor: string,
-    // inputId: string,
     inputType: string,
-    // getMaxValue?: (value: string) => void
     getValue: (value: number) => void
     value?: number
 }

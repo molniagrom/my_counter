@@ -21,28 +21,35 @@ export const SuperCount = () => {
     const [isSet, setIsSet] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [count, setCount] = useState(min)
+    const [settingOrCount, setSettingOrCount] = useState(true)
 
     return (
         <div className={s.superCount}>
-            <Settings
-                isSet={isSet}
-                setMin={setMin}
-                setCount={setCount}
-                setMax={setMax}
-                setError={setError}
-                error={error}
-                maxValue={max}
-                minValue={min}
-                setIsSet={setIsSet}
-            />
-            <Counter
-                error={error}
-                maxValue={max}
-                setCount={setCount}
-                isSet={isSet}
-                minValue={min}
-                count={count}
-            />
+            {settingOrCount
+                ? <Settings
+                    setSettingOrCount={setSettingOrCount}
+                    isSet={isSet}
+                    setMin={setMin}
+                    setCount={setCount}
+                    setMax={setMax}
+                    setError={setError}
+                    error={error}
+                    maxValue={max}
+                    minValue={min}
+                    setIsSet={setIsSet}
+                />
+                : <Counter
+                    setSettingOrCount={setSettingOrCount}
+                    error={error}
+                    maxValue={max}
+                    setCount={setCount}
+                    isSet={isSet}
+                    minValue={min}
+                    count={count}
+                />
+            }
+
+
         </div>
     );
 };

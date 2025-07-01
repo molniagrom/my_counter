@@ -13,9 +13,10 @@ type SettingsPropsType = {
     setIsSet: (isSet: boolean) => void
     setMax: (max: number) => void
     setMin: (min: number) => void
+    setSettingOrCount: (setSettingOrCount: boolean) => void
 }
 
-export const Settings = ({setIsSet, setMin, setMax, setCount, isSet, maxValue, minValue, error, setError}: SettingsPropsType) => {
+export const Settings = ({setIsSet, setSettingOrCount, setMin, setMax, setCount, isSet, maxValue, minValue, error, setError}: SettingsPropsType) => {
 
     const [maxLocal, setMaxLocal] = useState(maxValue);
     const [minLocal, setMinLocal] = useState(minValue);
@@ -71,6 +72,7 @@ export const Settings = ({setIsSet, setMin, setMax, setCount, isSet, maxValue, m
     const onClick = () => {
         if (error === null) {
             getAndSetValue(minLocal, maxLocal);
+            setSettingOrCount(false);
         }
     }
 

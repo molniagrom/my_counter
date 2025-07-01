@@ -6,11 +6,12 @@ type CounterPropsType = {
     maxValue: number,
     count: number,
     isSet: boolean,
+    setSettingOrCount: (setSettingOrCount: boolean) => void
     setCount: Dispatch<SetStateAction<number>>,
     error: string | null,
 }
 
-export const Counter = ({setCount, minValue, isSet, error, count, maxValue}: CounterPropsType) => {
+export const Counter = ({setCount, minValue, setSettingOrCount, isSet, error, count, maxValue}: CounterPropsType) => {
 
     const onClickHandlerInc = () => setCount(count + 1)
     const onClickHandlerRes = () => setCount(minValue)
@@ -32,6 +33,7 @@ export const Counter = ({setCount, minValue, isSet, error, count, maxValue}: Cou
                     disabled={count >= maxValue || !!error || isSet}
                     onClick={onClickHandlerInc}>inc
                 </button>
+                <button onClick={() => setSettingOrCount(true)}>Settings</button>
                 <button
                     disabled={count === minValue || !!error || isSet}
                     onClick={onClickHandlerRes}>reset
