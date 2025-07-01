@@ -1,17 +1,19 @@
 import s from "../styles/Count.module.css";
 import type {Dispatch, SetStateAction} from "react";
 
+import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
+
 type CounterPropsType = {
     minValue: number,
     maxValue: number,
     count: number,
     isSet: boolean,
-    setSettingOrCount: (setSettingOrCount: boolean) => void
+    dispatch: (dispatch: ActionType) => void
     setCount: Dispatch<SetStateAction<number>>,
     error: string | null,
 }
 
-export const Counter = ({setCount, minValue, setSettingOrCount, isSet, error, count, maxValue}: CounterPropsType) => {
+export const Counter = ({setCount, minValue, dispatch, isSet, error, count, maxValue}: CounterPropsType) => {
 
     const onClickHandlerInc = () => setCount(count + 1)
     const onClickHandlerRes = () => setCount(minValue)
@@ -33,7 +35,7 @@ export const Counter = ({setCount, minValue, setSettingOrCount, isSet, error, co
                     disabled={count >= maxValue || !!error || isSet}
                     onClick={onClickHandlerInc}>inc
                 </button>
-                <button onClick={() => setSettingOrCount(true)}>Settings</button>
+                <button onClick={() => dispatch({type: TOGGLE_COLLAPSED})}>Settings</button>
                 <button
                     disabled={count === minValue || !!error || isSet}
                     onClick={onClickHandlerRes}>reset

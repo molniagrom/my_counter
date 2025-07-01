@@ -2,6 +2,7 @@ import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 import s from "../styles/Settings.module.css"
 import {type Dispatch, type SetStateAction, useState} from "react";
+import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
 
 type SettingsPropsType = {
     minValue: number,
@@ -13,10 +14,10 @@ type SettingsPropsType = {
     setIsSet: (isSet: boolean) => void
     setMax: (max: number) => void
     setMin: (min: number) => void
-    setSettingOrCount: (setSettingOrCount: boolean) => void
+    dispatch: (dispatch: ActionType) => void
 }
 
-export const Settings = ({setIsSet, setSettingOrCount, setMin, setMax, setCount, isSet, maxValue, minValue, error, setError}: SettingsPropsType) => {
+export const Settings = ({setIsSet, dispatch, setMin, setMax, setCount, isSet, maxValue, minValue, error, setError}: SettingsPropsType) => {
 
     const [maxLocal, setMaxLocal] = useState(maxValue);
     const [minLocal, setMinLocal] = useState(minValue);
@@ -72,7 +73,7 @@ export const Settings = ({setIsSet, setSettingOrCount, setMin, setMax, setCount,
     const onClick = () => {
         if (error === null) {
             getAndSetValue(minLocal, maxLocal);
-            setSettingOrCount(false);
+            dispatch({type: TOGGLE_COLLAPSED});
         }
     }
 

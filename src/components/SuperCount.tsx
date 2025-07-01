@@ -1,7 +1,8 @@
 import {Settings} from "./Settings.tsx";
 import {Counter} from "./Counter.tsx";
 import s from "../styles/Count.module.css"
-import {useEffect, useState} from "react";
+import {useEffect, useReducer, useState} from "react";
+import {reducer} from "./reducer.tsx";
 
 export const SuperCount = () => {
     useEffect(() => {
@@ -21,13 +22,13 @@ export const SuperCount = () => {
     const [isSet, setIsSet] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [count, setCount] = useState(min)
-    const [settingOrCount, setSettingOrCount] = useState(true)
+    const [state, dispatch] = useReducer(reducer, {collapsed: false})
 
     return (
         <div className={s.superCount}>
-            {settingOrCount
+            {state.collapsed
                 ? <Settings
-                    setSettingOrCount={setSettingOrCount}
+                    dispatch={dispatch}
                     isSet={isSet}
                     setMin={setMin}
                     setCount={setCount}
@@ -39,7 +40,7 @@ export const SuperCount = () => {
                     setIsSet={setIsSet}
                 />
                 : <Counter
-                    setSettingOrCount={setSettingOrCount}
+                    dispatch={dispatch}
                     error={error}
                     maxValue={max}
                     setCount={setCount}
