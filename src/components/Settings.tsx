@@ -1,7 +1,7 @@
 import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 import s from "../styles/Settings.module.css"
-import {type Dispatch, type SetStateAction, useState} from "react";
+import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
 
 type SettingsPropsType = {
@@ -22,17 +22,32 @@ export const Settings = ({setIsSet, dispatch, setMin, setMax, setCount, isSet, m
     const [maxLocal, setMaxLocal] = useState(maxValue);
     const [minLocal, setMinLocal] = useState(minValue);
 
+    useEffect(() => {
+
+        const counterValueAsStr = localStorage.getItem("counterValue")
+        const counterMaxValueAsStr = localStorage.getItem("counterMaxValue")
+        const counterMinValueAsStr = localStorage.getItem("counterMinValue")
+
+        if (counterValueAsStr && counterMaxValueAsStr && counterMinValueAsStr) {
+            setCount(JSON.parse(counterValueAsStr))
+            setMaxLocal(JSON.parse(counterMaxValueAsStr))
+            setMinLocal(JSON.parse(counterMinValueAsStr))
+        }
+
+    }, [maxValue, minValue])
+
     const getAndSetValue = (min: number, max: number) => {
         setCount(min)
         setIsSet(false);
         setMax(max)
         setMin(min)
         localStorage.setItem("counterValue", JSON.stringify(min))
+        localStorage.setItem("counterMaxValue", JSON.stringify(maxLocal))
+        localStorage.setItem("counterMinValue", JSON.stringify(minLocal))
     }
 
     const getMaxValue = (value: number) => {
-        localStorage.setItem("counterMaxValue", JSON.stringify(value))
-
+        setMaxLocal(value)
         if (!isSet) {
             setIsSet(true)
         }
@@ -51,8 +66,7 @@ export const Settings = ({setIsSet, dispatch, setMin, setMax, setCount, isSet, m
 
     }
     const getStartValue = (value: number) => {
-        localStorage.setItem("counterMinValue", JSON.stringify(value))
-
+        setMinLocal(value)
         if (!isSet) {
             setIsSet(true)
         }
