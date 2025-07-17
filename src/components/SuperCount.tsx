@@ -3,8 +3,14 @@ import {Counter} from "./Counter.tsx";
 import s from "../styles/Count.module.css"
 import {useReducer, useState} from "react";
 import {reducer} from "./reducer.tsx";
+import {Switch} from '@mui/material';
 
-export const SuperCount = () => {
+type SuperCountPropsType = {
+    setIsLight?: (isLight: boolean) => void;
+    isLight?: boolean;
+}
+
+export const SuperCount = ({setIsLight, isLight}: SuperCountPropsType) => {
 
     const [max, setMax] = useState(0);
     const [min, setMin] = useState(0);
@@ -15,6 +21,7 @@ export const SuperCount = () => {
 
     return (
         <div className={s.superCount}>
+            <Switch onChange={() => setIsLight && setIsLight(!isLight)}/>
             {state.collapsed
                 ? <Settings
                     dispatch={dispatch}

@@ -1,5 +1,7 @@
 import s from "../styles/Count.module.css";
 import type {Dispatch, SetStateAction} from "react";
+import Button from '@mui/material/Button';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
 
@@ -35,7 +37,7 @@ export const Counter = ({setCount, minValue, dispatch, isSet, error, count, maxV
                     disabled={count >= maxValue || !!error || isSet}
                     onClick={onClickHandlerInc}>inc
                 </button>
-                <button onClick={() => dispatch({type: TOGGLE_COLLAPSED})}>Settings</button>
+                <Button variant={"contained"} endIcon={<SettingsSuggestIcon />} onClick={() => dispatch({type: TOGGLE_COLLAPSED})}>Settings</Button>
                 <button
                     disabled={count === minValue || !!error || isSet}
                     onClick={onClickHandlerRes}>reset

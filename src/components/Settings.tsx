@@ -1,8 +1,9 @@
-import {Button} from "./Button.tsx";
+import Button from '@mui/material/Button';
 import {Input} from "./Input.tsx";
 import s from "../styles/Settings.module.css"
 import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 type SettingsPropsType = {
     minValue: number,
@@ -17,7 +18,18 @@ type SettingsPropsType = {
     dispatch: (dispatch: ActionType) => void
 }
 
-export const Settings = ({setIsSet, dispatch, setMin, setMax, setCount, isSet, maxValue, minValue, error, setError}: SettingsPropsType) => {
+export const Settings = ({
+                             setIsSet,
+                             dispatch,
+                             setMin,
+                             setMax,
+                             setCount,
+                             isSet,
+                             maxValue,
+                             minValue,
+                             error,
+                             setError
+                         }: SettingsPropsType) => {
 
     const [maxLocal, setMaxLocal] = useState(maxValue);
     const [minLocal, setMinLocal] = useState(minValue);
@@ -111,7 +123,16 @@ export const Settings = ({setIsSet, dispatch, setMin, setMax, setCount, isSet, m
                 />
             </div>
             <div className={s.set}>
-                <Button disabled={!!error || !isSet} onClick={onClick}>set</Button>
+                <Button
+                    size={"large"}
+                    color={"primary"}
+                    variant={"contained"}
+                    endIcon={<CheckCircleIcon/>}
+                    disabled={!!error || !isSet}
+                    onClick={onClick}
+                >
+                    set
+                </Button>
             </div>
         </div>
     );
