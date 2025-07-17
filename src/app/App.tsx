@@ -1,7 +1,7 @@
 
 import './App.css'
 
-import {SuperCount} from "./components/SuperCount.tsx";
+import {SuperCount} from "../components/SuperCount.tsx";
 
 function App() {
     return (

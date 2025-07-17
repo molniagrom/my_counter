@@ -1,5 +1,5 @@
 import s from "../styles/Settings.module.css";
-import {type ChangeEvent, useEffect, useState} from "react";
+import {type ChangeEvent} from "react";
 
 type PropsTypeInput = {
     labelValue: string,
@@ -7,19 +7,12 @@ type PropsTypeInput = {
     inputType: string,
     getValue: (value: number) => void
     value?: number
+    className: string
 }
 
 export const Input = (
-    {inputType, value, getValue, labelValue, htmlFor}
+    {inputType, value, getValue, labelValue, className, htmlFor}
     : PropsTypeInput) => {
-
-    const [isRed, setRed] = useState(false);
-
-    useEffect(() => {
-        if (typeof value === "number") {
-            setRed(value < 0);
-        }
-    }, [value]);
 
     const getValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = e.currentTarget.value;
@@ -32,7 +25,8 @@ export const Input = (
             <input
                 value={value}
                 onChange={getValueHandler}
-                className={isRed ? `${s.input} ${s.red}` : s.input}
+                // className={error ? `${s.input} ${s.red}` : s.input}
+                className={s.input + " " + s[className]}
                 type={inputType}
                 />
         </div>

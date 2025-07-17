@@ -1,21 +1,19 @@
 import s from "../styles/Count.module.css";
-import type {Dispatch, SetStateAction} from "react";
+import {useAppDispatch, useAppSelector} from "../app/store.ts";
+import {setCount} from "../model/count-reducer.ts";
 
-type CounterPropsType = {
-    minValue: number,
-    maxValue: number,
-    count: number,
-    isSet: boolean,
-    setCount: Dispatch<SetStateAction<number>>,
-    error: string | null,
-}
+export const Counter = () => {
 
-export const Counter = ({setCount, minValue, isSet, error, count, maxValue}: CounterPropsType) => {
+    const minValue = useAppSelector(state => state.count.min)
+    const maxValue = useAppSelector(state => state.count.max)
+    const error = useAppSelector(state => state.count.error)
+    const isSet = useAppSelector(state => state.count.isSet)
+    const count = useAppSelector(state => state.count.count)
 
-    const onClickHandlerInc = () => setCount(count + 1)
-    const onClickHandlerRes = () => setCount(minValue)
+    const dispatch = useAppDispatch()
 
-
+    const onClickHandlerInc = () => dispatch(setCount(count + 1))
+    const onClickHandlerRes = () => dispatch(setCount(minValue))
 
     return (
         <div className={s.container}>
