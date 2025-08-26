@@ -1,26 +1,20 @@
 import s from "../styles/Count.module.css";
-import type {Dispatch, SetStateAction} from "react";
-import Button from '@mui/material/Button';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import {useAppDispatch, useAppSelector} from "../app/store.ts";
+import {setCount} from "../model/count-reducer.ts";
+import {selectCount, selectError, selectIsSet, selectMax, selectMin} from "../model/count-selectors.ts";
 
-import {type ActionType, TOGGLE_COLLAPSED} from "./reducer.tsx";
+export const Counter = () => {
 
-type CounterPropsType = {
-    minValue: number,
-    maxValue: number,
-    count: number,
-    isSet: boolean,
-    dispatch: (dispatch: ActionType) => void
-    setCount: Dispatch<SetStateAction<number>>,
-    error: string | null,
-}
+    const minValue = useAppSelector(selectMin)
+    const maxValue = useAppSelector(selectMax)
+    const error = useAppSelector(selectError)
+    const isSet = useAppSelector(selectIsSet)
+    const count = useAppSelector(selectCount)
 
-export const Counter = ({setCount, minValue, dispatch, isSet, error, count, maxValue}: CounterPropsType) => {
+    const dispatch = useAppDispatch()
 
-    const onClickHandlerInc = () => setCount(count + 1)
-    const onClickHandlerRes = () => setCount(minValue)
-
-
+    const onClickHandlerInc = () => dispatch(setCount(count + 1))
+    const onClickHandlerRes = () => dispatch(setCount(minValue))
 
     return (
         <div className={s.container}>
@@ -37,7 +31,6 @@ export const Counter = ({setCount, minValue, dispatch, isSet, error, count, maxV
                     disabled={count >= maxValue || !!error || isSet}
                     onClick={onClickHandlerInc}>inc
                 </button>
-                <Button variant={"contained"} endIcon={<SettingsSuggestIcon />} onClick={() => dispatch({type: TOGGLE_COLLAPSED})}>Settings</Button>
                 <button
                     disabled={count === minValue || !!error || isSet}
                     onClick={onClickHandlerRes}>reset
