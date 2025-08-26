@@ -1,14 +1,15 @@
 import s from "../styles/Count.module.css";
 import {useAppDispatch, useAppSelector} from "../app/store.ts";
 import {setCount} from "../model/count-reducer.ts";
+import {selectCount, selectError, selectIsSet, selectMax, selectMin} from "../model/count-selectors.ts";
 
 export const Counter = () => {
 
-    const minValue = useAppSelector(state => state.count.min)
-    const maxValue = useAppSelector(state => state.count.max)
-    const error = useAppSelector(state => state.count.error)
-    const isSet = useAppSelector(state => state.count.isSet)
-    const count = useAppSelector(state => state.count.count)
+    const minValue = useAppSelector(selectMin)
+    const maxValue = useAppSelector(selectMax)
+    const error = useAppSelector(selectError)
+    const isSet = useAppSelector(selectIsSet)
+    const count = useAppSelector(selectCount)
 
     const dispatch = useAppDispatch()
 

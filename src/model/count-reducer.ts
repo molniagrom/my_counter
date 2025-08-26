@@ -1,6 +1,6 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 
-type InitialStateType = {
+export type InitialStateType = {
     count: number,
     max: number,
     min: number,

@@ -12,14 +12,22 @@ import {
     setMax,
     setMin
 } from "../model/count-reducer.ts";
+import {
+    selectError,
+    selectIsMaxInputError,
+    selectIsMinInputError,
+    selectIsSet,
+    selectMax,
+    selectMin
+} from "../model/count-selectors.ts";
 
 export const Settings = () => {
-    const minValue = useAppSelector(state => state.count.min)
-    const maxValue = useAppSelector(state => state.count.max)
-    const error = useAppSelector(state => state.count.error)
-    const isSet = useAppSelector(state => state.count.isSet)
-    const isMinInputError = useAppSelector(state => state.count.isMinInputError)
-    const isMaxInputError = useAppSelector(state => state.count.isMaxInputError)
+    const minValue = useAppSelector(selectMin)
+    const maxValue = useAppSelector(selectMax)
+    const error = useAppSelector(selectError)
+    const isSet = useAppSelector(selectIsSet)
+    const isMinInputError = useAppSelector(selectIsMinInputError)
+    const isMaxInputError = useAppSelector(selectIsMaxInputError)
 
     const dispatch = useAppDispatch()
 
